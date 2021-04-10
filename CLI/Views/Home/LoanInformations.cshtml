@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+
+<h1>Loan Informations</h1>
+
+<div>
+    @ViewBag.aop
+</div>
+<div>
+    ViewBag.monthly_cost
+    @if (@ViewBag.monthly_cost == 0.0)
+    {
+        @:Error data please back to main page
+    }
+    else
+    {
+        @:Cost for January and 365 day in year
+        @ViewBag.monthly_cost
+    }
+</div>
+<div>
+    ViewBag.paid_interest_rate
+</div>
+<div>
+    @if(@ViewBag.paid_administrative_fees == 0.0)
+    {
+        @:No paid
+    } else
+    {
+        @ViewBag.paid_administrative_fees
+    }
+</div>
+
+
+
+<a asp-action="Index">Back</a>
+
