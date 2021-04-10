@@ -5,37 +5,60 @@
 <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
 
 
-<h1>Loan Informations</h1>
+<h1>TEST Loan Informations</h1>
 
 <div>
-    @ViewBag.aop
+    OK!!!annual_Interest_rate
+    @ViewBag.annual_Interest_rate
 </div>
 <div>
-    ViewBag.monthly_cost
-    @if (@ViewBag.monthly_cost == 0.0)
+    OK!!!interest_rate_calculated_monthly
+    @ViewBag.interest_rate_calculated_monthly
+</div>
+<div>
+    OK!!!paid_administrative_fees
+    @ViewBag.paid_administrative_fees
+</div>
+<div>
+    OK!!!duration_of_loan
+    @ViewBag.duration_of_loan
+</div>
+<div>
+    OK!!!loan_amount
+    @ViewBag.loan_amount
+</div>
+<div>
+    OK!!!monthly_cos
+    @ViewBag.monthly_cost
+</div>
+<div>
+    OK!!!paid_interest_rate
+    @ViewBag.paid_interest_rate
+</div>
+<div>
+    NO!!!AOP
+    @ViewBag.aop
+</div>
+
+<h1>Loan Informations</h1>
+<div class="navbar-text form-group col-9">
+    @if (@ViewBag.monthly_cost != 0.0)
     {
-        @:Error data please back to main page
+        @:Loan amount of @ViewBag.loan_amount kr. for @ViewBag.duration_of_loan years should show that the monthly payment is @ViewBag.monthly_cost kr.
+        @:Furthermore, it shows that the total amount paid as interest rate is @ViewBag.paid_interest_rate kr. and that administration fee was @ViewBag.paid_administrative_fees kr.
+        @:and AOP equals @ViewBag.aop
     }
     else
     {
-        @:Cost for January and 365 day in year
-        @ViewBag.monthly_cost
+        @:Something make wrong please click 'Back' and fill fiealds again :)
     }
 </div>
-<div>
-    ViewBag.paid_interest_rate
-</div>
-<div>
-    @if(@ViewBag.paid_administrative_fees == 0.0)
+<div class="form-group col-6">
+    @if (@ViewBag.interest_rate_calculated_monthly)
     {
-        @:No paid
-    } else
-    {
-        @ViewBag.paid_administrative_fees
+        @:*Interest rate calculated monthly is checked and monthly payment value is only for first rate
     }
 </div>
-
-
-
 <a asp-action="Index">Back</a>
+
 
