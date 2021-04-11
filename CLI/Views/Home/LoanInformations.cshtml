@@ -1,64 +1,29 @@
-﻿
+﻿@model CLI.Models.PaymentParametersModel
 @{
     Layout = null;
 }
 <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
 
 
-<h1>TEST Loan Informations</h1>
-
-<div>
-    OK!!!annual_Interest_rate
-    @ViewBag.annual_Interest_rate
-</div>
-<div>
-    OK!!!interest_rate_calculated_monthly
-    @ViewBag.interest_rate_calculated_monthly
-</div>
-<div>
-    OK!!!paid_administrative_fees
-    @ViewBag.paid_administrative_fees
-</div>
-<div>
-    OK!!!duration_of_loan
-    @ViewBag.duration_of_loan
-</div>
-<div>
-    OK!!!loan_amount
-    @ViewBag.loan_amount
-</div>
-<div>
-    OK!!!monthly_cos
-    @ViewBag.monthly_cost
-</div>
-<div>
-    OK!!!paid_interest_rate
-    @ViewBag.paid_interest_rate
-</div>
-<div>
-    NO!!!AOP
-    @ViewBag.aop
-</div>
-
 <h1>Loan Informations</h1>
-<div class="navbar-text form-group col-9">
-    @if (@ViewBag.monthly_cost != 0.0)
+<h3 class="text-center form-group">
+    @if (@ViewBag.monthly_cost != "0.00" && @Model.Loan_amount != 0 && @Model.Duration_of_loan != 0)
     {
-        @:Loan amount of @ViewBag.loan_amount kr. for @ViewBag.duration_of_loan years should show that the monthly payment is @ViewBag.monthly_cost kr.
+        @:Loan amount of @Model.Loan_amount kr. for @Model.Duration_of_loan years should show that the monthly payment is @ViewBag.monthly_cost kr.
         @:Furthermore, it shows that the total amount paid as interest rate is @ViewBag.paid_interest_rate kr. and that administration fee was @ViewBag.paid_administrative_fees kr.
-        @:and AOP equals @ViewBag.aop
+        @:and AOP equals @ViewBag.aop %
     }
     else
     {
         @:Something make wrong please click 'Back' and fill fiealds again :)
     }
-</div>
+</h3>
 <div class="form-group col-6">
-    @if (@ViewBag.interest_rate_calculated_monthly)
+    @if (@Model.Interest_rate_calculated_monthly)
     {
         @:*Interest rate calculated monthly is checked and monthly payment value is only for first rate
     }
 </div>
-<a asp-action="Index">Back</a>
+<a asp-action="Index"><h4>Back</h4></a>
 
 
