@@ -5,45 +5,6 @@
 <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
 
 
-<h1>TEST Loan Informations</h1>
-
-<div>
-    OK!!!annual_Interest_rate
-    @ViewBag.annual_Interest_rate
-    @Model.Annual_Interest_rate
-</div>
-<div>
-    OK!!!interest_rate_calculated_monthly
-    @ViewBag.interest_rate_calculated_monthly
-    @Model.Interest_rate_calculated_monthly
-</div>
-<div>
-    OK!!!paid_administrative_fees
-    @ViewBag.paid_administrative_fees
-</div>
-<div>
-    OK!!!duration_of_loan
-    @ViewBag.duration_of_loan
-    @Model.Duration_of_loan
-</div>
-<div>
-    OK!!!loan_amount
-    @*@ViewBag.loan_amount.ToString("N2");*@
-    @Model.Loan_amount
-</div>
-<div>
-    OK!!!monthly_cos
-    @ViewBag.monthly_cost
-</div>
-<div>
-    OK!!!paid_interest_rate
-    @ViewBag.paid_interest_rate
-</div>
-<div>
-    NO!!!AOP
-    @ViewBag.aop
-</div>
-
 <h1>Loan Informations</h1>
 <h3 class="text-center form-group">
     @if (@ViewBag.monthly_cost != "0.00" && @Model.Loan_amount != 0 && @Model.Duration_of_loan != 0)
