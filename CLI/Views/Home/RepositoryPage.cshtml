@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CLI.Models.LoanRepositorium>
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+<div class="panel-body">
+    <h2>Your all calculation</h2>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Loan amount</th>
+                <th>Loan duration</th>
+                <th>Monthly cost</th>
+                <th>Paid administrative</th>
+                <th>Interest rate</th>
+                <th>AOP</th>
+                <th>Annual Interest</th>
+                <th>Interest monthly</th>
+                <th>Administration fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CLI.Models.LoanRepositorium r in Model)
+            {
+            <tr>
+                <td>@r.Loan_amount</td>
+                <td>@r.Duration_of_loan</td>
+                <td>@r.Monthly_cost</td>
+                <td>@r.Paid_administrative_fees</td>
+                <td>@r.Paid_interest_rate</td>
+                <td>@r.AOP</td>
+                <td>@r.Annual_Interest_cost</td>
+                <td>@r.Interest_rate_calculated_monthly</td>
+                <td>@r.Administration_fee</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<a asp-action="Index"><h4>Back</h4></a>
+

@@ -11,19 +11,23 @@
     {
         @:Loan amount of @Model.Loan_amount kr. for @Model.Duration_of_loan years should show that the monthly payment is @ViewBag.monthly_cost kr.
         @:Furthermore, it shows that the total amount paid as interest rate is @ViewBag.paid_interest_rate kr. and that administration fee was @ViewBag.paid_administrative_fees kr.
-        @:and AOP equals @ViewBag.aop %
     }
     else
     {
         @:Something make wrong please click 'Back' and fill fiealds again :)
     }
 </h3>
+
+
+
 <div class="form-group col-6">
     @if (@Model.Interest_rate_calculated_monthly)
     {
         @:*Interest rate calculated monthly is checked and monthly payment value is only for first rate
     }
 </div>
+
+<a asp-action="RepositoryPage"><h4>Repository</h4></a>
 <a asp-action="Index"><h4>Back</h4></a>
 
 
