@@ -17,7 +17,6 @@ namespace CLI.Controllers
         private double Paid_administrative_fees { get; set; }     
         private int Duration_of_loan_in_months { get; set; }
 
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -29,24 +28,35 @@ namespace CLI.Controllers
         {
             if (ModelState.IsValid)
             {
-                Annual_Interest_rate = parameters.Annual_Interest_rate == true ? 0.05 : 0.02;
-                loan_amount = parameters.Loan_amount ?? 0.00;
-                Paid_administrative_fees = parameters.Administration_fee == true ? Calculation_administrative_fees() : 0.0;
-                Interest_rate_calculated_monthly = parameters.Interest_rate_calculated_monthly;
-                Duration_of_loan_in_months = parameters.Duration_of_loan * 12 ?? 0;
+                Set_basic_parameters(parameters);
 
                 ViewBag.paid_administrative_fees = Paid_administrative_fees;
                 ViewBag.monthly_cost = Calculation_monthly_cost_amound().ToString("N2");
                 ViewBag.paid_interest_rate = Calculation_interest_rate().ToString("N2");
                 ViewBag.aop = Calculation_AOP().ToString("N2");
-                                
-                //TODO: exceeding the value of double               
+
+                Repository.AddRepository(parameters, (double)ViewBag.paid_administrative_fees, ViewBag.monthly_cost, ViewBag.paid_interest_rate, ViewBag.aop, Annual_Interest_rate);                       
                 return View("LoanInformations", parameters);
             } 
             else
             {
                 return View();
             }
+        }
+
+        public ViewResult RepositoryPage()
+        {
+            return View(Repository.Repos.Where(r => r.Loan_amount != 0));
+        }
+
+        private void Set_basic_parameters(PaymentParametersModel parameters)
+        {
+                //0.02 is my interpretation
+                Annual_Interest_rate = parameters.Annual_Interest_rate == true ? 0.05 : 0.02;
+                loan_amount = parameters.Loan_amount ?? 0.00;
+                Paid_administrative_fees = parameters.Administration_fee == true ? Calculation_administrative_fees() : 0.0;
+                Interest_rate_calculated_monthly = parameters.Interest_rate_calculated_monthly;
+                Duration_of_loan_in_months = parameters.Duration_of_loan * 12 ?? 0;
         }
 
         #region main_method
@@ -75,7 +85,7 @@ namespace CLI.Controllers
                 {
                     rate_sum += 1 / Math.Pow(1 + Annual_Interest_rate / 12, counter);
                 }
-                //TODO: To small 
+
                 rate_sum = (loan_value / rate_sum) * Duration_of_loan_in_months;
                 aop = 100 * (rate_sum - loan_amount) / loan_amount;
             }
@@ -111,7 +121,7 @@ namespace CLI.Controllers
             return interest_value;
         }
         private double Calculation_monthly_cost_amound()
-        {           //TODO: make test when Loan_amount is 0
+        {           
             var loan_value = loan_amount + Paid_administrative_fees;
 
             if (Interest_rate_calculated_monthly)
@@ -132,8 +142,7 @@ namespace CLI.Controllers
         }
         private double Calculation_administrative_fees()
         {
-            //TODO: make test when Loan_amount is 0
-            return (loan_amount / 10000) <= 10000 ? (loan_amount / 10000) : 10000;
+            return (loan_amount / 10000) < 10000 ? (loan_amount / 10000) : 10000;
         }
         #endregion
     }
